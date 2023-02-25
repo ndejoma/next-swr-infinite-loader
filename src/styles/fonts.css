@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "Satoshi Var";
+  src: url("/fonts/Satoshi-Variable.woff2") format("woff2"),
+    url("/fonts/Satoshi-Variable.woff") format("woff"),
+    url("/fonts/Satoshi-Variable.eot") format("embedded-opentype"),
+    url("/fonts/Satoshi-Variable.ttf") format("truetype");
+  font-weight: 300 900;
+  font-display: block;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi Var";
+  src: url("/fonts/Satoshi-VariableItalic.woff2") format("woff2"),
+    url("/fonts/Satoshi-VariableItalic.woff") format("woff"),
+    url("/fonts/Satoshi-VariableItalic.ttf") format("truetype"),
+    url("/fonts/Satoshi-VariableItalic.eot") format("embedded-opentype");
+  font-weight: 300 900;
+  font-display: block;
+  font-style: italic;
+}

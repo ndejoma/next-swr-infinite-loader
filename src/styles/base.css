@@ -1,0 +1,28 @@
+@tailwind base;
+
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible {
+	@apply border-primary outline-primary outline-offset-0;
+}
+
+input.error,
+textarea.error {
+	@apply border-red-500;
+}
+
+input.error:focus,
+textarea.error:focus,
+input.error:focus-visible,
+textarea.error:focus-visible {
+	@apply border-red-500 outline-red-500 outline-offset-0;
+}

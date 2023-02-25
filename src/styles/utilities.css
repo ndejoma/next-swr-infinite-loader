@@ -1,0 +1,9 @@
+@tailwind utilities;
+
+.centered {
+	@apply flex justify-center items-center;
+}
+
+.clip {
+	clip-path: polygon(0 0, 100% 0%, 100% 80%, 0 90%);
+}
