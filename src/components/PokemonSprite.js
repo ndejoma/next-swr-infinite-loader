@@ -16,7 +16,7 @@ export default function PokemonSprite({
 			className='h-64 block border border-gray-200 shadow-lg rounded-md bg-white hover:border-2 hover:border-blue-500  hover:shadow-blue-100 transition-all delay-75 duration-75 hover:scale-105'
 		>
 			<h4 className='text-2xl font-medium px-5 pt-5'>{name}</h4>
-			<div className='mx-auto h-full flex justify-center py-10'>
+			<div className='h-full flex justify-center py-10'>
 				<div>
 					<Image
 						alt={name}
