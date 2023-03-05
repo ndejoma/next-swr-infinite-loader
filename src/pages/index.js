@@ -5,19 +5,18 @@ import {SWRConfig, unstable_serialize, useSWRConfig} from 'swr';
 import fetchJsonData from '@/utils/fetchJsonData';
 import PokemonSpritesList from '@/components/PokemonSpriteList';
 import Spinner from '@/components/icons/Spinner';
+import {toast} from 'react-toastify';
 
 const START_PAGE_IDX = 0;
 const PAGE_ITEMS_LIMIT = 20;
+const FALLBACK_KEY =
+  'https://pokeapi.co/api/v2/pokemon-species/?offset=0&limit=20';
 
 function getReqKey(pageIdx, prevPageData) {
   if (+pageIdx === 0 && !prevPageData) {
     return `https://pokeapi.co/api/v2/pokemon-species/?offset=${START_PAGE_IDX}&limit=${PAGE_ITEMS_LIMIT}`;
   }
   if (prevPageData && prevPageData?.next) {
-    console.log('A key was createdd')
-    console.log(`https://pokeapi.co/api/v2/pokemon-species/?offset=${
-      pageIdx * 20
-    }&limit=${PAGE_ITEMS_LIMIT}`)
     return `https://pokeapi.co/api/v2/pokemon-species/?offset=${
       pageIdx * 20
     }&limit=${PAGE_ITEMS_LIMIT}`;
@@ -27,37 +26,38 @@ function getReqKey(pageIdx, prevPageData) {
 }
 
 function PokemonSpritesSection() {
+  const {fallback} = useSWRConfig();
   //fetch the data infinite
   const {data, error, isLoading, isValidating, size, setSize} = useSwrInfinite(
     getReqKey,
     fetchJsonData,
     {
-      onSuccess: (data, key) => {
-        console.log(data, 'The data in success &&&&');
-        console.log(key, 'The key &&& sucess');
+      onError: function (err) {
+        toast.error(err.message);
       },
     }
   );
-  console.log(data, 'The data');
-  console.log(size, 'THe size');
+
   //the state calculated from existing states
+  //if results are undefined return []
+  const fallbackData = fallback[FALLBACK_KEY]?.results ?? [];
   // the pokemon species data transformed and flatten to include just the results
-  const pokemonSpecies = data ? data.flatMap(({results}) => results) : [];
+  //since we are using SSR we going to provide the fallback data results here
+  const pokemonSpecies = data
+    ? data.flatMap(({results}) => results)
+    : fallbackData;
   /**
    * Check is the last element in the array has a next property
    *  to determine if there is more data to load
    */
   const hasMoreDataToLoad =
     data?.length > 0 && Boolean(data[data.length - 1]?.next);
-  const isEmpty = pokemonSpecies?.length === 0;
-  // console.log(data && data[size - 1]  === "undefined", "WHAT IS THIS");
+  const isEmpty = pokemonSpecies.length === 0;
   const isLoadingMore =
     !error &&
     (isLoading || (size > 0 && data && typeof data[size - 1] === 'undefined'));
   const availableSpeciesNo = data ? data[data.length - 1]?.count : 0;
   const loadSpeciesNo = pokemonSpecies.length;
-  console.log(size > 0 && data && data[size - 1], 'what is it');
-  // console.log()
   return (
     <section className='py-12'>
       <div>
@@ -69,15 +69,7 @@ function PokemonSpritesSection() {
           className='border block mb-10 py-2 rounded-md px-2 border-gray-400 focus:outline-primary focus:border-primary'
         />
       </div>
-      {error ? (
-        <div className='py-10 text-center'>
-          {' '}
-          <h3 className='text-2xl font-medium text-red-500'>
-            {' '}
-            Error: {error?.message}
-          </h3>
-        </div>
-      ) : !isEmpty ? (
+      {!isEmpty ? (
         <>
           <PokemonSpritesList pokemonSpecies={pokemonSpecies} />
           <div className='mt-6 ml-2'>
@@ -163,21 +155,21 @@ export default function Home({fallback}) {
 
 export async function getStaticProps() {
   try {
-    const fallbackData = await fetchJsonData(
+    const firstPageData = await fetchJsonData(
       `https://pokeapi.co/api/v2/pokemon-species/?offset=${START_PAGE_IDX}&limit=${PAGE_ITEMS_LIMIT}`
     );
     return {
       props: {
         fallback: {
-          [unstable_serialize(getReqKey(0, null))]: fallbackData,
+          [unstable_serialize(FALLBACK_KEY)]: firstPageData,
         },
       },
     };
-  } catch (error) {
+  } catch (err) {
     return {
       props: {
         fallback: {
-          [unstable_serialize(getReqKey(0, null))]: null,
+          [unstable_serialize(FALLBACK_KEY)]: null,
         },
       },
     };

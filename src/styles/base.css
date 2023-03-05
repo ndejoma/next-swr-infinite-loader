@@ -3,7 +3,13 @@
 *,
 *::after,
 *::before {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+:root {
+  --toastify-color-success: #0ca745;
+  --toastify-color-error: #ef4444;
 }
