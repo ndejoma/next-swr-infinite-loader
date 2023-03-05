@@ -4,17 +4,17 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with
 
 ## Getting Started
 
--   ### Clone this this repository
+- ### Clone this this repository
 
     ```sh
       git clone -b main https://github.com/ndejoma/swr-infinite-loader-example
     ```
+    
 - Install all the dependencies and devDependencies and make sure your `NODE_ENV` is `development`, if not the devDependencies will not be installed
     ```sh
         pnpm install
     ```
-
--   ### Run the development server:
+- ### Run the development server
 
     ```sh
       pnpm run dev
