@@ -14,6 +14,7 @@ specifiers:
   prettier: ^2.8.4
   react: 18.2.0
   react-dom: 18.2.0
+  react-intersection-observer: ^9.4.3
   react-toastify: ^9.1.1
   swr: ^2.0.4
   tailwindcss: ^3.2.7
@@ -23,6 +24,7 @@ dependencies:
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-intersection-observer: 9.4.3_react@18.2.0
   react-toastify: 9.1.1_biqbaboplfbrettd7655fr4n2y
   swr: 2.0.4_react@18.2.0
 
@@ -2282,6 +2284,14 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-intersection-observer/9.4.3_react@18.2.0:
+    resolution: {integrity: sha512-WNRqMQvKpupr6MzecAQI0Pj0+JQong307knLP4g/nBex7kYfIaZsPpXaIhKHR+oV8z+goUbH9e10j6lGRnTzlQ==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

@@ -6,7 +6,6 @@ export default async function fetchJsonData(...args) {
   } else {
     const errData = await res.json();
     const error = Error('Error while fetching data');
-    // const
     error.status = res.status;
     error.info = errData;
     throw error;
