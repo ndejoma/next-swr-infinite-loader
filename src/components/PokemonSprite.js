@@ -1,6 +1,6 @@
 import NextImage from 'next/legacy/image';
 
-export default function PokemonSprite({name = '', spriteUrl = '', idx}) {
+export default function PokemonSprite({ name = '', spriteUrl = '', idx }) {
   return (
     <a
       target='_blank'
