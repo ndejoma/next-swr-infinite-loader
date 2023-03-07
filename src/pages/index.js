@@ -1,6 +1,6 @@
 import NextLink from '@/components/NextLink';
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useSwrInfinite from 'swr/infinite';
 import { toast } from 'react-toastify';
 import { useInView } from 'react-intersection-observer';
@@ -28,7 +28,7 @@ function getReqKey(pageIdx, prevPageData) {
 }
 
 function PokemonSpritesSection() {
-  const { ref, entry, inView } = useInView({ rootMargin: '200px' });
+  const { ref, entry, inView } = useInView({ rootMargin: '0px' });
   const { fallback } = useSWRConfig();
   //fetch the data infinite
   const { data, error, isLoading, isValidating, size, setSize } =
@@ -39,7 +39,9 @@ function PokemonSpritesSection() {
         });
       },
     });
-
+  //states
+  const [searchText, setSearchText] = useState('');
+  const [deferredSearchText, setDeferredSearchText] = useState(searchText);
   //the state calculated from existing states
   //if results are undefined return []
   const fallbackData = fallback[FALLBACK_KEY]?.results ?? [];
@@ -48,12 +50,22 @@ function PokemonSpritesSection() {
   const pokemonSpecies = data
     ? data.flatMap(({ results }) => results)
     : fallbackData;
+
+  //filter the pokemon based on the search text
+  //if the search text is empty return the the whole list
+  const pokemonSpeciesToShow =
+    deferredSearchText && pokemonSpecies.length > 0
+      ? pokemonSpecies.filter(({ name }) => {
+          return name.startsWith(deferredSearchText);
+        })
+      : pokemonSpecies;
   /**
    * Check is the last element in the array has a next property
    *  to determine if there is more data to load
    */
-  const hasMoreDataToLoad =
-    data?.length > 0 && Boolean(data[data.length - 1]?.next);
+  const hasMoreDataToLoad = Boolean(
+    data?.length > 0 && data[data.length - 1]?.next
+  );
   const isEmpty = pokemonSpecies.length === 0;
   const isLoadingMore =
     !error &&
@@ -72,6 +84,15 @@ function PokemonSpritesSection() {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entry]);
 
+  useEffect(() => {
+    let timerId = window.setTimeout(() => {
+      setDeferredSearchText(searchText);
+    }, 50);
+    return () => {
+      window.clearTimeout(timerId);
+    };
+  }, [searchText]);
+
   return (
     <section className='py-12'>
       <div>
@@ -79,28 +100,32 @@ function PokemonSpritesSection() {
           Search species
         </label>
         <input
-          type='text'
-          className='border block mb-10 py-2 rounded-md px-2 border-gray-400 focus:outline-primary focus:border-primary'
+          type='search'
+          className='border block mb-10 py-2 rounded-md px-2 border-gray-400 focus:outline-offset-0 focus:outline-primary focus:border-primary focus-visible:outline-primary focus-visible:border-primary focus-visible:outline-offset-0'
+          onChange={e => {
+            setSearchText(e.target.value);
+          }}
+          value={searchText}
         />
       </div>
       {!isEmpty ? (
         <>
-          <PokemonSpritesList pokemonSpecies={pokemonSpecies} />
+          <PokemonSpritesList pokemonSpecies={pokemonSpeciesToShow} />
           <div className='mt-6 ml-2'>
             <p className='text-xl'>
               Loaded <strong>{loadSpeciesNo}</strong> of{' '}
               <strong>{availableSpeciesNo}</strong> pokemon species
             </p>
           </div>
-          {isLoadingMore ? (
+          {isLoadingMore && hasMoreDataToLoad ? (
             <div className='flex flex-col items-center justify-center font-medium gap-2 mt-6'>
-              <Spinner className='text-primary h-7 w-7' />{' '}
+              <Spinner className='text-primary h-8 w-8' />
               <p>Loading more...</p>
             </div>
           ) : null}
           {isValidating && !isLoadingMore ? (
             <div className='flex flex-col items-center justify-center font-medium gap-2 mt-6'>
-              <Spinner className='text-primary h-7 w-7' /> <p>Validating...</p>
+              <Spinner className='text-primary h-8 w-8' /> <p>Validating...</p>
             </div>
           ) : null}
           <div className='flex justify-center items-center'>
