@@ -6,7 +6,7 @@ specifiers:
   classnames: ^2.3.2
   eslint: 8.34.0
   eslint-config-next: 13.1.6
-  husk: ^0.5.3
+  husky: ^8.0.3
   lint-staged: ^13.1.2
   next: 13.1.6
   postcss: ^8.4.21
@@ -31,7 +31,7 @@ devDependencies:
   autoprefixer: 10.4.13_postcss@8.4.21
   eslint: 8.34.0
   eslint-config-next: 13.1.6_eslint@8.34.0
-  husk: 0.5.3
+  husky: 8.0.3
   lint-staged: 13.1.2
   postcss: 8.4.21
   postcss-import: 15.1.0_postcss@8.4.21
@@ -488,12 +488,6 @@ packages:
   /astral-regex/2.0.0:
     resolution: {integrity: sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==}
     engines: {node: '>=8'}
-    dev: true
-
-  /async-stream-flow/1.0.2:
-    resolution: {integrity: sha512-Iy1ynz7dKRhlvypxRm3zLbPDJsYaeKOQRfxRhZEM3ZZCNq3N0jR/T6KRUJxWVf9AHi5ynj/Wp4L7gATeLGSW9g==}
-    dependencies:
-      through3: 1.1.7
     dev: true
 
   /autoprefixer/10.4.13_postcss@8.4.21:
@@ -1281,13 +1275,6 @@ packages:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: true
 
-  /fs-flow/1.0.2:
-    resolution: {integrity: sha512-AUYZEh7fNmZFHm8w2S4rs0oaJg0l/a8AXLAAFqu/ulmpbPoIxkovrfw/j9GcAYxIc3Oj7eRIibTX82s5+nCtag==}
-    dependencies:
-      async-stream-flow: 1.0.2
-      through3: 1.1.7
-    dev: true
-
   /fs.realpath/1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
@@ -1482,51 +1469,10 @@ packages:
     engines: {node: '>=12.20.0'}
     dev: true
 
-  /husk-async/1.0.3:
-    resolution: {integrity: sha512-VW6/vJKdnhbybdeh4e0ITZ1azI50xmTUrfBSuZhOcTxTOyinJLt1/RsegJXmK+c92MzcOr9WsOJpSt6EZW11xg==}
-    dependencies:
-      async-stream-flow: 1.0.2
-    dev: true
-
-  /husk-core/1.0.4:
-    resolution: {integrity: sha512-duZv9ZJFlUt44vwEGLW1HvnzL9kS6AQklydtOYRJ4BT9O9aZ1Aixtt0sBv7b2dTicchYMpSkdJJNVpC8BKT0cA==}
-    dependencies:
-      husk-print: 1.0.3
-      husk-through: 1.0.2
-    dev: true
-
-  /husk-exec/1.0.4:
-    resolution: {integrity: sha512-eHZH+pYbDGFZXxvvvUhi0Jj8QA4963XpjuYk11ytK/oF2LcLGp9dzng7OUytHa9Y+EucdfGl+7js9Klurwntyw==}
-    dependencies:
-      process-flow: 1.0.2
-    dev: true
-
-  /husk-fs/1.0.3:
-    resolution: {integrity: sha512-OizyOaE/FlV/11SOWUOvgBmIvZD3/bGghKQafzNtq4I6VePWZ2kH3q1zuck1cLfhOcYztdVdZaOaRC+rFHOcBg==}
-    dependencies:
-      fs-flow: 1.0.2
-    dev: true
-
-  /husk-print/1.0.3:
-    resolution: {integrity: sha512-paJ8IGpFoS9vKdWHS4tqtiwoF6dX48Il4z1/yP+9ulEwm6RTpC42mkKAj6MtD+CIYAxCLAwYvkTwMqh1Vg/KWg==}
-    dependencies:
-      print-flow: 1.0.2
-    dev: true
-
-  /husk-through/1.0.2:
-    resolution: {integrity: sha512-hm0xz/MkfZDxHm0PFm07sb+FuHTHCtPHeXNcBtf0Kl/vKx2hQoliYU1NC5JVjO+fe79z4uCBfI9/l3rFctIFwg==}
-    dependencies:
-      through-flow: 1.0.2
-    dev: true
-
-  /husk/0.5.3:
-    resolution: {integrity: sha512-4rLByTytY2LtiuyiRQ20C4AmSZ0+/imh1557r92TFcgAgeTgcsVwHlGLi2nO4QNiEKhvhlPj9HuCjKWfwNtwYA==}
-    dependencies:
-      husk-async: 1.0.3
-      husk-core: 1.0.4
-      husk-exec: 1.0.4
-      husk-fs: 1.0.3
-      zephyr: 1.2.8
+  /husky/8.0.3:
+    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /ignore/5.2.4:
@@ -2306,18 +2252,6 @@ packages:
     hasBin: true
     dev: true
 
-  /print-flow/1.0.2:
-    resolution: {integrity: sha512-yg5dgWP8pvtV0vWEQNXP47Nwnmt+3gOJg0EgH6mXfrUUlz/fVX7Xkif5gGMiSDMq3QGwswE3RoTlgzSMpRLs1g==}
-    dependencies:
-      through3: 1.1.7
-    dev: true
-
-  /process-flow/1.0.2:
-    resolution: {integrity: sha512-MJGNN728wtacWIPgp+bsUKwtNX9aKOw2HZVD+jrnZkTMCf4jrhvZnZnEaz6NUHKEy7rEFmz6sVDmz7O2k06xvQ==}
-    dependencies:
-      through3: 1.1.7
-    dev: true
-
   /prop-types/15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
     dependencies:
@@ -2731,18 +2665,8 @@ packages:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: true
 
-  /through-flow/1.0.2:
-    resolution: {integrity: sha512-j6IAxjqlbQAdQ45aQ2qw/TLdOsh3mzsaOtnMnw2ceW6N+zowlQZX3EXLhnqoa6Sz+NUdZdxzAEQhLTXSXHVoNw==}
-    dependencies:
-      through3: 1.1.7
-    dev: true
-
   /through/2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
-    dev: true
-
-  /through3/1.1.7:
-    resolution: {integrity: sha512-9bUZXDGridMzC3uqRKw+ilb4n4S0Fo6AQNi9wM9zBYHJpQVsfI4JaroFSACXmDKViL+upDI3+V/io3UwlCTmtA==}
     dev: true
 
   /tiny-glob/0.2.9:
@@ -2935,8 +2859,4 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-    dev: true
-
-  /zephyr/1.2.8:
-    resolution: {integrity: sha512-Evw01lEec5dp3gUlyKrCSRlZpcO2FpRq+SgpA1Ha9YgGKY2kFkGh6S3nVgzCagN9HtD//vmET/fQzojiK+NYog==}
     dev: true
